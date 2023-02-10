@@ -10,6 +10,10 @@ int main(){
 	cout << "Please enter a positive integer: ";
 	cin >> n;
 
+	if (n <= 0) {
+		cout << "Incorrect entry, please try again." << endl;
+		return -1;
+	}
 	cout << fib(n) << endl;
 
 	return 0;

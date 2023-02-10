@@ -12,6 +12,11 @@ int main(){
 	cout << "Please enter the number of triangles in the pinetree: ";
 	cin >> n;
 
+	if (n <= 0) {
+		cout << "Incorrect entry, please try again." << endl;
+		return -1;
+	}
+
 	cout << "Please enter the desired symbol to be used: ";
 	cin >> symb;
 

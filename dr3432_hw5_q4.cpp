@@ -9,6 +9,11 @@ int main(){
 	int n;
 	cout << "Enter a positive integer >= 2: ";
 	cin >> n;
+
+	if (n <= 1) {
+		cout << "Incorrect entry, please try again." << endl;
+		return -1;
+	}
 	
 	printDivisors(n);
 	return 0;

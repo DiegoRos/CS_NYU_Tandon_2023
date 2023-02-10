@@ -13,6 +13,10 @@ int main(){
 
 	cout << "Please enter a positive integer >= 2: ";
 	cin >> m;
+	if (m <= 1) {
+		cout << "Incorrect entry, please try again." << endl;
+		return -1;
+	}
 	cout << endl;
 	for (int i = 2; i <= m; i++) {
 		analyzeDivisors(i, countDivs1, sumDivs1);
