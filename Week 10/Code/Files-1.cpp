@@ -142,19 +142,4 @@ int main() {
 	sayHello(cout);
 }
 
-template <class T>
-class LList; //class pre-definition
 
-template <class T>
-class LListNode {
-	T data;
-	LListNode<T>* next;
-public:
-	LListNode(const T& newData = T(), LListNode<T>* newNext=nullptr) :data(newData), next(newNext) {}
-	friend class LList<T>; //ok becuase the class was pre-defined
-};
-
-template <class T>
-class LList {
-	LListNode<T>* head;
-};
