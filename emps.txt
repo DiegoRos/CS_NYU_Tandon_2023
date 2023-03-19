@@ -1,0 +1,6 @@
+17 5.25 Daniel Katz
+18 6.75 John F. Jones
+19 7.64 Diego Rosenberg
+20 8.1 Bob Vance
+21 100 Jim Halpert
+22 5 Dwight K. Schrute
