@@ -109,7 +109,6 @@ public:
 
 // Implement functions to read and write to file
 void readEmployees(DLList<Employee>& employees, string employeeFile = "emps.txt");
-void separateFullName(string fullName, vector<string> &names);
 void readHours(DLList<Employee>& employees, string hoursFile = "hours.txt");
 void printPayroll(DLList<Employee>& employees);
 
@@ -321,13 +320,6 @@ void readEmployees(DLList<Employee>& employees, string employeeFile) {
         employees.insertAtHead(temp);
     }
 
-}
-
-// Idea to use string stream: https://www.geeksforgeeks.org/program-extract-words-given-string/
-void separateFullName(string fullName, vector<string> &names) {
-    stringstream ss(fullName);
-    string name;
-    while (ss >> name) names.push_back(name);
 }
 
 void readHours(DLList<Employee>& employees, string hoursFile){
