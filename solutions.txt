@@ -1,0 +1,171 @@
+Name: Diego Rosenberg
+
+NYU Email: dr3432@nyu.edu
+
+
+Solutions to midterm exam
+
+
+Question 1 (Multiple choice anwser): a
+
+Question 2 (Multiple choice anwser): a
+
+Question 3 (Multiple choice anwser): c 
+    (may be missing a semicolon but that is a pure virtual function)
+
+
+Question 4 (Provide Code): 
+class Derived: public Base{
+    Derived& operator=(const Derived& rhs){
+        //Call the base class assignment operator here
+        Base base = rhs;
+    }
+}
+
+
+Question 5 (Single line of code):
+delete[] arrPtr;
+
+
+Question 6 (Operator):
+The arrow operator ->, call would be ptr->data.
+
+
+Question 7 (Algorithm; english answer):
+Although maybe not the most efficient solution, one solution would be to utilize any of the sub-quadratic 
+sorting algorithms we have learned (like merge sort) to sort the array.
+After the array is sorted then you can access the nth element in constant time with the [] operator.
+This would give runtime complexity of Theta( nlog(n) ).
+
+
+Question 8: (Algorithm; english answer):
+You can do this in Theta(n) time by using a stack. First you can offload the entire queue
+to a stack so taht the item on the back of the queue is inserted last. Once this is completed
+you can unload this stack into the existing queue to reverse the order.
+Example:
+q = 1 -> 2 -> 3      offload to stack: s = 3 -> 2 -> 1       offload to queue again: q = 3 -> 2 -> 1
+
+
+Question 9: (Function):
+bool isValidPLNR(PLNRNode* root) {
+    if (!root)
+        return true;
+    else if (root->data > 0) {
+        // !root->right will return true if root->right is NULL and false otherwise. 
+        if (!root->right) return false;
+
+        return isValidPLNR(root->left);
+    }
+    else if (root->data < 0) {
+        // !root->left will return true if root->left is NULL and false otherwise. 
+        if (!root->left) return false;
+
+        // If tree is still corret it will continue to children.
+        return isValidPLNR(root->right);
+    }
+    else {
+        if (! ((root->left && root->right) || (!root->left && !root->right)) )
+            return false;
+        
+        return (isValidPLNR(root->left) && isValidPLNR(root->right));
+    }
+}
+
+Question 10: (Program):
+#include <iostream>
+#include <vector>
+#include <string>
+#include <fstream>
+
+using namespace std;
+
+class Employee{
+private:
+    string name;
+    double wage;
+    double pay;
+    // If false it means that a worker is hourly
+    bool isWeekly;
+    double hours;
+
+public:
+    Employee(string newName, double newWage, bool workType): 
+    name(newName), 
+    wage(newWage), 
+    isWeekly(workType){
+        calculatePay();
+    }
+    Employee(string newName, double newWage, bool workType, double newHours): 
+    name(newName), 
+    wage(newWage), 
+    isWeekly(workType),
+    hours(newHours){
+        calculatePay();
+    }
+
+    string getName() {return name;}
+    double getPay() {return pay;}
+    void calculatePay();
+};
+
+void readEmployees(vector<Employee*> &employeeList);
+void printPayroll(const vector<Employee*> employees);
+
+int main() {
+    vector<Employee*> employees;
+    readEmployees(employees);
+    printPayroll(employees);
+
+    return 0;
+}
+
+
+void Employee::calculatePay() {
+    if (isWeekly) {
+        pay = wage;
+    }
+    else {
+        int extraHours = hours - 40;
+        if (extraHours > 0) 
+            pay = ((hours - 40) * wage) + (extraHours * 1.5 * wage);
+
+        else
+            pay = hours * wage;
+    }
+}
+
+
+void readEmployees(vector<Employee*> &employeeList){
+    ifstream employeeFile("emps.txt");
+    char employeeType;
+    double wage;
+    double hours;
+    string name;
+    Employee* newEmployee;
+
+    
+    while (employeeFile >> employeeType){
+        if (employeeType == 'S') {
+            employeeFile >> wage;
+            getline(employeeFile, name);
+             newEmployee = new Employee(name, wage, true);
+        }
+        else {
+            employeeFile >> wage >> hours;
+            getline(employeeFile, name);
+             newEmployee = new Employee(name, wage, false, hours);
+
+        }
+        employeeList.push_back(newEmployee);
+    }
+
+
+    employeeFile.close();
+}
+
+void printPayroll(const vector<Employee*> employees){
+    cout << endl;
+    for (int i = 0; i < employees.size(); i++)
+        cout << employees[i]->getName() << " should be paid $" << employees[i]->getPay() << endl;
+    cout << endl;
+}
