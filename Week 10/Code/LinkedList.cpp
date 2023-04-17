@@ -30,7 +30,7 @@ class LList {
     int numberOfElements;
 
 public:
-    LList() :head(nullptr)numberOfElements(0){}
+    LList() :head(nullptr), numberOfElements(0){}
     LList(const LList &rhs) :head(nullptr){ *this = rhs; }
     ~LList() { clear(); }
     void insertAtHead(T newData);
@@ -41,7 +41,7 @@ public:
     T pop_back();
 
 
-    void insertAtPOint(LListNode<T> *ptr, T newData);
+    void insertAtPoint(LListNode<T> *ptr, T newData);
     int size() const {return numberOfElements; }
 };
 
@@ -78,7 +78,7 @@ T LList<T>::pop_front(){
     }
 
     T temp = head->data;
-    LListNode *oldHead = head;
+    LListNode<T>* oldHead = head;
     head = head->next;
 
     delete oldHead;
@@ -111,8 +111,8 @@ template <class T>
 void LList<T>::clear() {
     if (isEmpty()) return;
 
-    LListNode *temp = head;
-    LListNode *deletedNode;
+    LListNode<T> *temp = head;
+    LListNode<T> *deletedNode;
     while (temp != nullptr){
         deletedNode = temp;
         temp = temp->next;
