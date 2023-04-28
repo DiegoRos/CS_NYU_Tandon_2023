@@ -1,0 +1,65 @@
+Name: Diego Rosenberg
+
+Email: dr3432@nyu.edu
+
+1) (b)
+
+2) (b)
+
+3) (d)
+
+4) Queues
+
+5) 
+
+6) IPV4 did not provide enough IP addresses since it was restricted to 32 bit long addresses.
+    IPV6 aims to correct this by adding more usable IP addresses. One of the main differences is
+    that there is no need for IP masking in IPV6 since there are so many usable addresses, while IPV4
+    does need masking in networks.
+
+7) When performing I/O instructions the CPU must change from something that can interact with the OS.
+    Once the I/O action is performed the CPU must return to user mode and set the correct flags.
+
+8) Deadlocks occur when certain conditions for entering a critical section are met. The four conditions are
+    (1) (2) (3) (4). To PREVENT this from ever happening we must remove one of the 4 previous conditions, such as removing
+
+
+9) The computer sends a signal out to the nearby routers to notify that it is in the area. The router
+    acknoledges that the computer is in range and that it received the signal. Once this handshake is complete,
+    the computer asks the router for a usable IP address. The router receives this signal and sends an available 
+    IP adress back to the computer. The computer then acknoledges taht it received the IP adress and can now surf the web.
+
+10) This algorithm requires all of the actions taken by a proces to be konwn previous to strating the proces.
+    This means that the algorithm would have to be omnicient in order to be able to accuratly create a LRU algorithm.
+    And thus making it almost impossible to implement correctly without significant overhead and memory use.
+
+11) If there is packet loss when testing the connection, due to external factors outside the network, the algorithm
+    might register that the network is unavailable or slow (eventhough it is not). This causes it to look for an alternate
+    route that might be worse than the original one.
+
+12) Full code:
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+// Names utilized for classes.
+template<class T>
+class BST;
+
+template<class T>
+class BSTNode;
+
+//FUNCTION TODO
+template <class T>
+bool checkInOrder(BST<T>* root, vector<T> check, int& index){
+    if (!root) return true;
+
+    if (root->data != check[index++])
+        return false;
+
+    bool left = checkInOrder(root->left, check, index);
+    bool right = checkInOrder(root->right, check, index);
+
+    return (left && right);
+}
